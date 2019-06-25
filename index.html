@@ -1,0 +1,188 @@
+<!Doctype html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function () {
+              console.log('service worker registered');
+            })
+            .catch(function () {
+              console.warn('service worker failed');
+            });
+        }
+      </script>
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="manifest" href="manifest.json" /> 
+      <meta name="theme-color" content="#317EFB"/>
+    <link rel="apple-touch-icon" href="app-images/images/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="app-images/images/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="app-images/images/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="app-images/images/icons/icon-152x152.png">
+        
+    <meta name="apple-mobile-web-app-title" content="IMC">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+<style>
+body {
+    -webkit-animation: colorchange 60s infinite; 
+    animation: colorchange 60s infinite;
+}
+@-webkit-keyframes colorchange {
+     0%  {background: #f5f5f5;}
+    25%  {background: #f5f5f5;}
+    50%  {background: #f5f5f5;}
+    75%  {background: #f5f5f5;}
+    100% {background: #f5f5f5;}
+}
+@keyframes colorchange {
+     0%  {background: #f5f5f5;}
+    25%  {background: #f5f5f5;}
+    50%  {background: #f5f5f5;}
+    75%  {background: #f5f5f5;}
+    100% {background: #f5f5f5;}
+} 
+
+    .container {
+  width: 500px;
+  clear: both;
+}
+
+.container input {
+  width: 100%;
+  clear: both;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px
+}
+</style>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h1>IMC</h1>
+  <p>Utilize esse programa para verificar a sua massa corporal!</p> 
+</div>
+
+    <div class="container">
+        <h2>Calculadora IMC</h2>
+        <p>Calcule seu indice de massa corporal em questão de segundos:</p>            
+        <table class="table">
+          <thead>
+  <tr>
+    <td>Entre 17 e 18,49</td>
+    <td>Abaixo do peso.</td>
+  </tr>
+  <tr>
+    <td>Entre 18,5 e 24,99</td>
+    <td>Peso normal.</td>
+    
+  </tr>
+  <tr>
+    <td>Entre 25 e 29,99</td>
+    <td>Acima do peso.</td>
+  </tr>
+  <tr>
+    <td>Entre 30 e 34,99</td>
+    <td>Obesidade I</td>
+  </tr>
+  <tr>
+    <td>Entre 35 e 39,99</td>
+    <td>Obesidade II (severa)</td>
+  </tr>
+  <tr>
+    <td>Acima de 40</td>
+    <td>Obesidade III (morbida)</td>
+  </tr>
+</table>
+<span style="display:inline-block; width: 15;"></span>
+
+    <meta charset="utf-8">
+    <title>IMC</title>
+    <script type="text/javascript">
+        function calcular(){
+
+    		var formulario = document.getElementById("formulario");	
+    		
+    			
+    		var kilos  		= +formulario.kilos.value;
+    		var metros 		= +formulario.metros.value;
+    		var centimetros = +formulario.centimetros.value;
+    		
+
+    		var altura = (metros * 100 + centimetros) / 100;
+    		 
+
+    		var imc = kilos / (altura * altura);
+    		
+
+    		formulario.imc.value = imc.toFixed(2);
+    		
+    		if(imc < 20)
+    		{
+    			alert("Abaixo do peso!");
+    		} 
+    		else if(imc >20 && imc <= 25)
+    		{
+    			alert("	Peso normal!");
+    		}
+    		else if(imc >25 && imc <= 30)
+    		{
+    			alert("Acima do peso!");
+    		}
+    		else if(imc >30 && imc <= 35)
+    		{
+    			alert("Obesidade I");
+    		}
+    		else if(imc >35 && imc <= 40)
+    		{
+    			alert("Obesidade II (severa)");
+    		}
+    		else if(imc >40 && imc <= 50)
+    		{
+    			alert("Obesidade III (morbida)");
+    		}
+    	}
+    </script>
+</head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<body>
+    <div class="container"></div>
+    <form id="formulario">
+    <fieldset>
+    	<legend>Coloque os dados abaixo:</legend>
+    	
+        <label for="kilos">Kilos:</label>
+        <input name="kilos" type="text" />
+    
+        <label for="metros">Metros:</label>
+        <input name="metros" type="text" />
+    
+        <label for="centimetros">Centimetros:</label>
+        <input name="centimetros" type="text" />
+    
+        <label for="imc">IMC:</label>
+        <input name="imc" type="text" disabled="disabled" />
+
+        <a href="#" class="btn btn-secondary btn-lg btn-block" onclick="calcular();" "role="button" aria-pressed="true">Calcular</a>
+        <span style="display:inline-block; width: 15;"></span>
+      </fieldset>
+    </form>
+</body>
+</html>
